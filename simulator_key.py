@@ -7,45 +7,51 @@
 import os
 import asyncio
 import uuid
+import time
 from azure.iot.device.aio import IoTHubDeviceClient
 from azure.iot.device import Message
 
-messages_to_send = 10
 
-
-async def main():
-    # The connection string for a device should never be stored in code. For the sake of simplicity we're using an environment variable here.
-    #conn_str = os.getenv("IOTHUB_DEVICE_CONNECTION_STRING")
-    conn_str = "HostName=iot-demo-hub1.azure-devices.net;DeviceId=simulated-vm-device1;SharedAccessKey=dCDgVItTl0j+nrddy/MHXX/fTv/S9EVemLzTB4AGjdU="
-
-    # The client object is used to interact with your Azure IoT hub.
-    device_client = IoTHubDeviceClient.create_from_connection_string(conn_str)
-
+async def send_recurring_telemetry(device_client):
     # Connect the client.
     await device_client.connect()
 
-    async def send_test_message(i):
-        print("sending message #" + str(i))
-        msg = Message("test2 wind speed " + str(i))
+    # Send recurring telemetry
+    i = 0
+    while True:
+        i += 1
+        msg = Message("test wind speed " + str(i))
         msg.message_id = uuid.uuid4()
         msg.correlation_id = "correlation-1234"
         msg.custom_properties["tornado-warning"] = "yes"
         msg.content_encoding = "utf-8"
         msg.content_type = "application/json"
+        print("sending message #" + str(i))
         await device_client.send_message(msg)
-        print("done sending message #" + str(i))
+        time.sleep(2)
 
-    # send `messages_to_send` messages in parallel
-    await asyncio.gather(*[send_test_message(i) for i in range(1, messages_to_send + 1)])
 
-    # Finally, shut down the client
-    await device_client.shutdown()
+def main():
+    # The connection string for a device should never be stored in code. For the sake of simplicity we're using an environment variable here.
+    #conn_str = os.getenv("IOTHUB_DEVICE_CONNECTION_STRING")
+    conn_str = "HostName=iot-demo-hub1.azure-devices.net;DeviceId=simulated-vm-device1;SharedAccessKey=dCDgVItTl0j+nrddy/MHXX/fTv/S9EVemLzTB4AGjdU="
+    # The client object is used to interact with your Azure IoT hub.
+    device_client = IoTHubDeviceClient.create_from_connection_string(conn_str)
+
+    print("IoTHub Device Client Recurring Telemetry Sample")
+    print("Press Ctrl+C to exit")
+    loop = asyncio.get_event_loop()
+    try:
+        loop.run_until_complete(send_recurring_telemetry(device_client))
+    except KeyboardInterrupt:
+        print("User initiated exit")
+    except Exception:
+        print("Unexpected exception!")
+        raise
+    finally:
+        loop.run_until_complete(device_client.shutdown())
+        loop.close()
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
-
-    # If using Python 3.6 or below, use the following code instead of asyncio.run(main()):
-    # loop = asyncio.get_event_loop()
-    # loop.run_until_complete(main())
-    # loop.close()
+    main()
