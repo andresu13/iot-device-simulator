@@ -20,7 +20,7 @@ async def send_recurring_telemetry(device_client):
     i = 0
     while True:
         i += 1
-        msg = Message("test wind speed " + str(i))
+        msg = Message("tes2 wind speed " + str(i))
         msg.message_id = uuid.uuid4()
         msg.correlation_id = "correlation-1234"
         msg.custom_properties["tornado-warning"] = "yes"
