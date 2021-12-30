@@ -23,6 +23,10 @@ class SensorTemp():
     def readSensorData(self):
         self.current_temp = np.random.normal(self.current_temp, 2)
         return self.current_temp
+    def sensorName(self):
+        return "Temperature"
+    def sensorID(self):
+        return "temp-01"
 
 class SensorHumidity():
     def __init__(self, min_humidity=0, max_humidity=100):
@@ -33,32 +37,34 @@ class SensorHumidity():
         #self.current_temp = random.randrange(self.min_humidity, self.max_humidity)
         self.current_humidity = np.random.normal(self.current_humidity, 2)
         return self.current_humidity
+    def sensorName(self):
+        return "Humidity"
+    def sensorID(self):
+        return "humidity-01"
 
 ## This method will send Device-to-Cloud (C2D) messages/telemetry
-async def send_recurring_telemetry():
+async def send_recurring_telemetry(sensors):
     # Connect the client.
     #await device_client.connect()
-
-    # Initialize sensors
-    sensor_temp = SensorTemp()
-    sensor_humidity = SensorHumidity()
-
+    
     # Send recurring telemetry
     i = 0
     while True:
         i += 1
-        #msg = Message("tes wind speed " + str(i))
-        #msg = Message(json.dumps({"temperature": 50}))
-        current_temp = sensor_temp.readSensorData()
-        current_humidity = sensor_humidity.readSensorData()
-        msg = Message(json.dumps({"temperature": current_temp, "humidity": current_humidity}))
-        print(msg)
+        msg_dict  = {}
+        for sensor in sensors:
+            sensor_name = sensor.sensorName()
+            sensor_id = sensor.sensorID()
+            sensor_value = sensor.readSensorData()
+            msg_dict[sensor_name] = sensor_value
+            #msg = Message(json.dumps({"temperature": current_temp, "humidity": current_humidity}))
+        msg = Message(json.dumps(msg_dict))
         msg.message_id = uuid.uuid4()
-        msg.correlation_id = "correlation-1234"
-        msg.custom_properties["tornado-warning"] = "whoknows"
+        msg.correlation_id = uuid.uuid4()
         msg.content_encoding = "utf-8"
         msg.content_type = "application/json"
         print("sending message #" + str(i))
+        print(msg)
         await device_client.send_message(msg)
         time.sleep(device_properties["send_interval"])
 
@@ -152,13 +158,18 @@ async def main():
     #####################################
 
     # Initialize sensors
-    sens_temp = SensorTemp
+    sensor_temp = SensorTemp()
+    sensor_humidity = SensorHumidity()
+    sensor_list = [sensor_temp, sensor_humidity]
 
     # Start sending telemetry
     print("IoTHub Device Client Recurring Telemetry Sample")
     print("Press Ctrl+C to exit")
     try:
-        await send_recurring_telemetry()
+        await send_recurring_telemetry(sensor_list)
+        #await send_recurring_telemetry([sensor_temp])
+        #asyncio.gather(send_recurring_telemetry([sensor_temp]), send_recurring_telemetry([sensor_humidity]))
+        #asyncio.gather(send_recurring_telemetry([sensor_temp]))
     except KeyboardInterrupt:
         print("User initiated exit")
     except Exception:

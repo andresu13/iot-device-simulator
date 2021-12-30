@@ -1,0 +1,11 @@
+﻿{
+  "id": "76ba545e-6a38-463f-8bda-57ac9dc0aa64",
+  "port": 21530,
+  "inputs": [
+    "iot-demo-hub1-input"
+  ],
+  "outputs": [
+    "output",
+    "test-output"
+  ]
+}

@@ -1,0 +1,414 @@
+﻿{
+  "nodes": [
+    {
+      "id": "iot-demo-hub1-input_0",
+      "name": "iot-demo-hub1-input",
+      "type": "Input",
+      "dataSourceType": "InputIoTHub",
+      "partitionIds": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "subNodes": [
+        {
+          "id": "iot-demo-hub1-input_0_0",
+          "name": "iot-demo-hub1-input",
+          "type": "Input",
+          "processorId": "iot-demo-hub1-input#0$0",
+          "partitionIds": [
+            0
+          ]
+        },
+        {
+          "id": "iot-demo-hub1-input_0_1",
+          "name": "iot-demo-hub1-input",
+          "type": "Input",
+          "processorId": "iot-demo-hub1-input#1$0",
+          "partitionIds": [
+            1
+          ]
+        },
+        {
+          "id": "iot-demo-hub1-input_0_2",
+          "name": "iot-demo-hub1-input",
+          "type": "Input",
+          "processorId": "iot-demo-hub1-input#2$0",
+          "partitionIds": [
+            2
+          ]
+        },
+        {
+          "id": "iot-demo-hub1-input_0_3",
+          "name": "iot-demo-hub1-input",
+          "type": "Input",
+          "processorId": "iot-demo-hub1-input#3$0",
+          "partitionIds": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iot-demo-hub1-input_3_0",
+      "name": "iot-demo-hub1-input",
+      "type": "Input",
+      "dataSourceType": "InputIoTHub",
+      "partitionIds": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "subNodes": [
+        {
+          "id": "iot-demo-hub1-input_3_0_0",
+          "name": "iot-demo-hub1-input",
+          "type": "Input",
+          "processorId": "iot-demo-hub1-input_3#0$0",
+          "partitionIds": [
+            0
+          ]
+        },
+        {
+          "id": "iot-demo-hub1-input_3_0_1",
+          "name": "iot-demo-hub1-input",
+          "type": "Input",
+          "processorId": "iot-demo-hub1-input_3#1$0",
+          "partitionIds": [
+            1
+          ]
+        },
+        {
+          "id": "iot-demo-hub1-input_3_0_2",
+          "name": "iot-demo-hub1-input",
+          "type": "Input",
+          "processorId": "iot-demo-hub1-input_3#2$0",
+          "partitionIds": [
+            2
+          ]
+        },
+        {
+          "id": "iot-demo-hub1-input_3_0_3",
+          "name": "iot-demo-hub1-input",
+          "type": "Input",
+          "processorId": "iot-demo-hub1-input_3#3$0",
+          "partitionIds": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "outputStep_outputStep_0",
+      "name": "outputStep",
+      "type": "Step",
+      "partitionIds": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scriptPosition": {
+        "startLine": 1,
+        "startColumn": 1,
+        "startOffset": 0,
+        "endLine": 4,
+        "endColumn": 25,
+        "endOffset": 63
+      },
+      "inputTimeShift": "00:00:00",
+      "subNodes": [
+        {
+          "id": "outputStep_outputStep_0_0",
+          "name": "outputStep",
+          "type": "Step",
+          "processorId": "outputStep#0$0",
+          "partitionIds": [
+            0
+          ]
+        },
+        {
+          "id": "outputStep_outputStep_0_1",
+          "name": "outputStep",
+          "type": "Step",
+          "processorId": "outputStep#1$0",
+          "partitionIds": [
+            1
+          ]
+        },
+        {
+          "id": "outputStep_outputStep_0_2",
+          "name": "outputStep",
+          "type": "Step",
+          "processorId": "outputStep#2$0",
+          "partitionIds": [
+            2
+          ]
+        },
+        {
+          "id": "outputStep_outputStep_0_3",
+          "name": "outputStep",
+          "type": "Step",
+          "processorId": "outputStep#3$0",
+          "partitionIds": [
+            3
+          ]
+        },
+        {
+          "id": "outputStepMerger_0_0",
+          "name": "outputStep",
+          "type": "Merger",
+          "processorId": "outputStepMerger#0$0",
+          "partitionIds": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test-output_test-output_0",
+      "name": "test-output",
+      "type": "Step",
+      "partitionIds": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scriptPosition": {
+        "startLine": 7,
+        "startColumn": 1,
+        "startOffset": 70,
+        "endLine": 12,
+        "endColumn": 25,
+        "endOffset": 159
+      },
+      "inputTimeShift": "00:00:00",
+      "subNodes": [
+        {
+          "id": "test-output_test-output_0_0",
+          "name": "test-output",
+          "type": "Step",
+          "processorId": "test-output#0$0",
+          "partitionIds": [
+            0
+          ]
+        },
+        {
+          "id": "test-output_test-output_0_1",
+          "name": "test-output",
+          "type": "Step",
+          "processorId": "test-output#1$0",
+          "partitionIds": [
+            1
+          ]
+        },
+        {
+          "id": "test-output_test-output_0_2",
+          "name": "test-output",
+          "type": "Step",
+          "processorId": "test-output#2$0",
+          "partitionIds": [
+            2
+          ]
+        },
+        {
+          "id": "test-output_test-output_0_3",
+          "name": "test-output",
+          "type": "Step",
+          "processorId": "test-output#3$0",
+          "partitionIds": [
+            3
+          ]
+        },
+        {
+          "id": "test-outputMerger_0_0",
+          "name": "test-output",
+          "type": "Merger",
+          "processorId": "test-outputMerger#0$0",
+          "partitionIds": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "outputStep-output_0",
+      "name": "output",
+      "type": "Output",
+      "processorId": "outputStep-output#0$0",
+      "dataSourceType": "LocalOutput",
+      "partitionIds": [
+        0
+      ],
+      "inputTimeShift": "00:10:00"
+    },
+    {
+      "id": "test-output-test-output_0",
+      "name": "test-output",
+      "type": "Output",
+      "processorId": "test-output-test-output#0$0",
+      "dataSourceType": "LocalOutput",
+      "partitionIds": [
+        0
+      ],
+      "inputTimeShift": "00:10:00"
+    }
+  ],
+  "edges": [
+    {
+      "source": "iot-demo-hub1-input_0_0",
+      "target": "outputStep_outputStep_0_0"
+    },
+    {
+      "source": "iot-demo-hub1-input_0",
+      "target": "outputStep_outputStep_0_0"
+    },
+    {
+      "source": "iot-demo-hub1-input_0",
+      "target": "outputStep_outputStep_0"
+    },
+    {
+      "source": "iot-demo-hub1-input_0_1",
+      "target": "outputStep_outputStep_0_1"
+    },
+    {
+      "source": "iot-demo-hub1-input_0",
+      "target": "outputStep_outputStep_0_1"
+    },
+    {
+      "source": "iot-demo-hub1-input_0_2",
+      "target": "outputStep_outputStep_0_2"
+    },
+    {
+      "source": "iot-demo-hub1-input_0",
+      "target": "outputStep_outputStep_0_2"
+    },
+    {
+      "source": "iot-demo-hub1-input_0_3",
+      "target": "outputStep_outputStep_0_3"
+    },
+    {
+      "source": "iot-demo-hub1-input_0",
+      "target": "outputStep_outputStep_0_3"
+    },
+    {
+      "source": "iot-demo-hub1-input_3_0_0",
+      "target": "test-output_test-output_0_0"
+    },
+    {
+      "source": "iot-demo-hub1-input_3_0",
+      "target": "test-output_test-output_0_0"
+    },
+    {
+      "source": "iot-demo-hub1-input_3_0",
+      "target": "test-output_test-output_0"
+    },
+    {
+      "source": "iot-demo-hub1-input_3_0_1",
+      "target": "test-output_test-output_0_1"
+    },
+    {
+      "source": "iot-demo-hub1-input_3_0",
+      "target": "test-output_test-output_0_1"
+    },
+    {
+      "source": "iot-demo-hub1-input_3_0_2",
+      "target": "test-output_test-output_0_2"
+    },
+    {
+      "source": "iot-demo-hub1-input_3_0",
+      "target": "test-output_test-output_0_2"
+    },
+    {
+      "source": "iot-demo-hub1-input_3_0_3",
+      "target": "test-output_test-output_0_3"
+    },
+    {
+      "source": "iot-demo-hub1-input_3_0",
+      "target": "test-output_test-output_0_3"
+    },
+    {
+      "source": "iot-demo-hub1-input_0_0",
+      "target": "outputStep_outputStep_0"
+    },
+    {
+      "source": "outputStep_outputStep_0_0",
+      "target": "outputStepMerger_0_0"
+    },
+    {
+      "source": "iot-demo-hub1-input_0_1",
+      "target": "outputStep_outputStep_0"
+    },
+    {
+      "source": "outputStep_outputStep_0_1",
+      "target": "outputStepMerger_0_0"
+    },
+    {
+      "source": "iot-demo-hub1-input_0_2",
+      "target": "outputStep_outputStep_0"
+    },
+    {
+      "source": "outputStep_outputStep_0_2",
+      "target": "outputStepMerger_0_0"
+    },
+    {
+      "source": "iot-demo-hub1-input_0_3",
+      "target": "outputStep_outputStep_0"
+    },
+    {
+      "source": "outputStep_outputStep_0_3",
+      "target": "outputStepMerger_0_0"
+    },
+    {
+      "source": "outputStepMerger_0_0",
+      "target": "outputStep-output_0"
+    },
+    {
+      "source": "outputStep_outputStep_0",
+      "target": "outputStep-output_0"
+    },
+    {
+      "source": "iot-demo-hub1-input_3_0_0",
+      "target": "test-output_test-output_0"
+    },
+    {
+      "source": "test-output_test-output_0_0",
+      "target": "test-outputMerger_0_0"
+    },
+    {
+      "source": "iot-demo-hub1-input_3_0_1",
+      "target": "test-output_test-output_0"
+    },
+    {
+      "source": "test-output_test-output_0_1",
+      "target": "test-outputMerger_0_0"
+    },
+    {
+      "source": "iot-demo-hub1-input_3_0_2",
+      "target": "test-output_test-output_0"
+    },
+    {
+      "source": "test-output_test-output_0_2",
+      "target": "test-outputMerger_0_0"
+    },
+    {
+      "source": "iot-demo-hub1-input_3_0_3",
+      "target": "test-output_test-output_0"
+    },
+    {
+      "source": "test-output_test-output_0_3",
+      "target": "test-outputMerger_0_0"
+    },
+    {
+      "source": "test-outputMerger_0_0",
+      "target": "test-output-test-output_0"
+    },
+    {
+      "source": "test-output_test-output_0",
+      "target": "test-output-test-output_0"
+    }
+  ]
+}
