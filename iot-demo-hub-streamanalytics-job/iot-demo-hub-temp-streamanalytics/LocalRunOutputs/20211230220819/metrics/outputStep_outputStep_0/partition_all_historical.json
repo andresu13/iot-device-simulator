@@ -1,0 +1,7 @@
+﻿{"timestamp":"2021-12-31T03:08:53.3132766Z","payload":{"QueryWatermarkDelaySeconds":5.895768}}
+{"timestamp":"2021-12-31T03:09:03.3022776Z","payload":{"QueryWatermarkDelaySeconds":6.313624300000001}}
+{"timestamp":"2021-12-31T03:09:13.3068525Z","payload":{"QueryWatermarkDelaySeconds":5.6739101}}
+{"timestamp":"2021-12-31T03:09:23.3024412Z","payload":{"QueryWatermarkDelaySeconds":6.1120191}}
+{"timestamp":"2021-12-31T03:09:33.2956477Z","payload":{"QueryWatermarkDelaySeconds":5.6019663}}
+{"timestamp":"2021-12-31T03:09:43.300162Z","payload":{"QueryWatermarkDelaySeconds":2.5143553}}
+{"timestamp":"2021-12-31T03:09:52.2879108Z","payload":{"QueryWatermarkDelaySeconds":2.8362555}}

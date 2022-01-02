@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="resourceName" Label="resourceName" Group="Expanded" SubscriptionId="subscriptionId" TotalStreamingUnits="3" ActivityId="2e6750f8-618a-4936-a119-33570885f2a4" EventsOutOfOrderPolicy="Adjust" EventsOutOfOrderMaxDelayInMS="0" EventsLateArrivalMaxDelayInMS="0" />
+    <Node Id="streamingNode0" Label="streamingNode0" Group="Expanded" MemorySizeInMB="2048" />
+    <Node Id="iot-demo-hub1-input#0$0" Label="iot-demo-hub1-input" ProcessorType="Input" ProcessorId="iot-demo-hub1-input#0$0" AdapterType="InputIoTHub" PartitionIds="0" SerializerType="Json" />
+    <Node Id="iot-demo-hub1-input#1$0" Label="iot-demo-hub1-input" ProcessorType="Input" ProcessorId="iot-demo-hub1-input#1$0" AdapterType="InputIoTHub" PartitionIds="1" SerializerType="Json" />
+    <Node Id="iot-demo-hub1-input#2$0" Label="iot-demo-hub1-input" ProcessorType="Input" ProcessorId="iot-demo-hub1-input#2$0" AdapterType="InputIoTHub" PartitionIds="2" SerializerType="Json" />
+    <Node Id="iot-demo-hub1-input#3$0" Label="iot-demo-hub1-input" ProcessorType="Input" ProcessorId="iot-demo-hub1-input#3$0" AdapterType="InputIoTHub" PartitionIds="3" SerializerType="Json" />
+    <Node Id="iot-table-stg1#0$0" Label="iot-table-stg1" ProcessorType="Trill" ProcessorId="iot-table-stg1#0$0" InputTimeShift="00:00:00" />
+    <Node Id="iot-table-stg1#1$0" Label="iot-table-stg1" ProcessorType="Trill" ProcessorId="iot-table-stg1#1$0" InputTimeShift="00:00:00" />
+    <Node Id="iot-table-stg1#2$0" Label="iot-table-stg1" ProcessorType="Trill" ProcessorId="iot-table-stg1#2$0" InputTimeShift="00:00:00" />
+    <Node Id="iot-table-stg1#3$0" Label="iot-table-stg1" ProcessorType="Trill" ProcessorId="iot-table-stg1#3$0" InputTimeShift="00:00:00" />
+    <Node Id="iot-table-stg1-iot-table-stg1#0$0" Label="iot-table-stg1" ProcessorType="Output" ProcessorId="iot-table-stg1-iot-table-stg1#0$0" AdapterType="LocalOutput" PartitionIds="0" SerializerType="Json" InputTimeShift="00:10:00" />
+    <Node Id="iot-table-stg1Merger#0$0" Label="iot-table-stg1Merger" ProcessorType="Merger" ProcessorId="iot-table-stg1Merger#0$0" />
+  </Nodes>
+  <Links>
+    <Link Source="resourceName" Target="streamingNode0" Category="Contains" />
+    <Link Source="streamingNode0" Target="iot-demo-hub1-input#0$0" Label="iot-demo-hub1-input#0$0" Category="Contains" />
+    <Link Source="streamingNode0" Target="iot-demo-hub1-input#1$0" Label="iot-demo-hub1-input#1$0" Category="Contains" />
+    <Link Source="streamingNode0" Target="iot-demo-hub1-input#2$0" Label="iot-demo-hub1-input#2$0" Category="Contains" />
+    <Link Source="streamingNode0" Target="iot-demo-hub1-input#3$0" Label="iot-demo-hub1-input#3$0" Category="Contains" />
+    <Link Source="streamingNode0" Target="iot-table-stg1#0$0" Label="iot-table-stg1#0$0" Category="Contains" />
+    <Link Source="iot-table-stg1#0$0" Target="iot-demo-hub1-input#0$0" />
+    <Link Source="streamingNode0" Target="iot-table-stg1#1$0" Label="iot-table-stg1#1$0" Category="Contains" />
+    <Link Source="iot-table-stg1#1$0" Target="iot-demo-hub1-input#1$0" />
+    <Link Source="streamingNode0" Target="iot-table-stg1#2$0" Label="iot-table-stg1#2$0" Category="Contains" />
+    <Link Source="iot-table-stg1#2$0" Target="iot-demo-hub1-input#2$0" />
+    <Link Source="streamingNode0" Target="iot-table-stg1#3$0" Label="iot-table-stg1#3$0" Category="Contains" />
+    <Link Source="iot-table-stg1#3$0" Target="iot-demo-hub1-input#3$0" />
+    <Link Source="streamingNode0" Target="iot-table-stg1-iot-table-stg1#0$0" Label="iot-table-stg1-iot-table-stg1#0$0" Category="Contains" />
+    <Link Source="iot-table-stg1-iot-table-stg1#0$0" Target="iot-table-stg1Merger#0$0" />
+    <Link Source="streamingNode0" Target="iot-table-stg1Merger#0$0" Label="iot-table-stg1Merger#0$0" Category="Contains" />
+    <Link Source="iot-table-stg1Merger#0$0" Target="iot-table-stg1#0$0" />
+    <Link Source="iot-table-stg1Merger#0$0" Target="iot-table-stg1#1$0" />
+    <Link Source="iot-table-stg1Merger#0$0" Target="iot-table-stg1#2$0" />
+    <Link Source="iot-table-stg1Merger#0$0" Target="iot-table-stg1#3$0" />
+  </Links>
+  <Properties />
+  <Categories />
+</DirectedGraph>

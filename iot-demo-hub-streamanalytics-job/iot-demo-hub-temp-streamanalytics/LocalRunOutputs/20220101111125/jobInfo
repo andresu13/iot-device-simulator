@@ -1,0 +1,10 @@
+﻿{
+  "id": "2e6750f8-618a-4936-a119-33570885f2a4",
+  "port": 19215,
+  "inputs": [
+    "iot-demo-hub1-input"
+  ],
+  "outputs": [
+    "iot-table-stg1"
+  ]
+}

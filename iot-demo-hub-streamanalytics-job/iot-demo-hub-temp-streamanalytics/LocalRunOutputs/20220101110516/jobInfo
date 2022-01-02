@@ -1,0 +1,10 @@
+﻿{
+  "id": "86789d74-d8f8-476b-b7fc-132303b934c0",
+  "port": 14534,
+  "inputs": [
+    "iot-demo-hub1-input"
+  ],
+  "outputs": [
+    "output"
+  ]
+}

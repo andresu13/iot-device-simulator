@@ -1,0 +1,6 @@
+﻿{"timestamp":"2021-12-31T03:07:29.7795644Z","payload":{"OutputEvents":0.0,"OutputEventsPerSecond":0.0,"OutputWatermarkDelaySeconds":5.920496699999999,"OutputEventsSerializerErrors":0.0,"OutputEventsSerializerErrorsPerSecond":0.0}}
+{"timestamp":"2021-12-31T03:07:39.7789998Z","payload":{"OutputEvents":0.0,"OutputEventsPerSecond":0.0,"OutputWatermarkDelaySeconds":6.0863179,"OutputEventsSerializerErrors":0.0,"OutputEventsSerializerErrorsPerSecond":0.0}}
+{"timestamp":"2021-12-31T03:07:49.7682417Z","payload":{"OutputEvents":0.0,"OutputEventsPerSecond":0.0,"OutputWatermarkDelaySeconds":5.3541619,"OutputEventsSerializerErrors":0.0,"OutputEventsSerializerErrorsPerSecond":0.0}}
+{"timestamp":"2021-12-31T03:07:59.7711571Z","payload":{"OutputEvents":0.0,"OutputEventsPerSecond":0.0,"OutputWatermarkDelaySeconds":5.8938742,"OutputEventsSerializerErrors":0.0,"OutputEventsSerializerErrorsPerSecond":0.0}}
+{"timestamp":"2021-12-31T03:08:09.780259Z","payload":{"OutputEvents":0.0,"OutputEventsPerSecond":0.0,"OutputWatermarkDelaySeconds":6.148867,"OutputEventsSerializerErrors":0.0,"OutputEventsSerializerErrorsPerSecond":0.0}}
+{"timestamp":"2021-12-31T03:08:15.5484097Z","payload":{"OutputEvents":0.0,"OutputEventsPerSecond":0.0,"OutputWatermarkDelaySeconds":5.7260535,"OutputEventsSerializerErrors":0.0,"OutputEventsSerializerErrorsPerSecond":0.0}}

@@ -1,0 +1,6 @@
+SELECT
+    *, GetMetadataPropertyValue([iot-demo-hub1-input], 'IoTHub.ConnectionDeviceId') as device_id
+INTO
+    [iot-table-stg1]
+FROM
+    [iot-demo-hub1-input]

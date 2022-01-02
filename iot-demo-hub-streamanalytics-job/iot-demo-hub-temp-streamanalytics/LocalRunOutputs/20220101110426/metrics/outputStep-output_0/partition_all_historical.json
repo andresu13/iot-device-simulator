@@ -1,0 +1,2 @@
+﻿{"timestamp":"2022-01-01T16:04:54.5374151Z","payload":{"OutputEvents":5.0,"OutputEventsPerSecond":5.0,"OutputWatermarkDelaySeconds":6.2039082,"OutputEventsSerializerErrors":0.0,"OutputEventsSerializerErrorsPerSecond":0.0}}
+{"timestamp":"2022-01-01T16:04:54.6804174Z","payload":{"OutputEvents":5.0,"OutputEventsPerSecond":5.0,"OutputWatermarkDelaySeconds":6.5587681,"OutputEventsSerializerErrors":0.0,"OutputEventsSerializerErrorsPerSecond":0.0}}

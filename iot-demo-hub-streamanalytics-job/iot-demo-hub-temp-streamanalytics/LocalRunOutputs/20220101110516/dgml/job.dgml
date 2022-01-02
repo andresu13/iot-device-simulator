@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="resourceName" Label="resourceName" Group="Expanded" SubscriptionId="subscriptionId" TotalStreamingUnits="3" ActivityId="86789d74-d8f8-476b-b7fc-132303b934c0" EventsOutOfOrderPolicy="Adjust" EventsOutOfOrderMaxDelayInMS="0" EventsLateArrivalMaxDelayInMS="0" />
+    <Node Id="streamingNode0" Label="streamingNode0" Group="Expanded" MemorySizeInMB="2048" />
+    <Node Id="iot-demo-hub1-input#0$0" Label="iot-demo-hub1-input" ProcessorType="Input" ProcessorId="iot-demo-hub1-input#0$0" AdapterType="InputIoTHub" PartitionIds="0" SerializerType="Json" />
+    <Node Id="iot-demo-hub1-input#1$0" Label="iot-demo-hub1-input" ProcessorType="Input" ProcessorId="iot-demo-hub1-input#1$0" AdapterType="InputIoTHub" PartitionIds="1" SerializerType="Json" />
+    <Node Id="iot-demo-hub1-input#2$0" Label="iot-demo-hub1-input" ProcessorType="Input" ProcessorId="iot-demo-hub1-input#2$0" AdapterType="InputIoTHub" PartitionIds="2" SerializerType="Json" />
+    <Node Id="iot-demo-hub1-input#3$0" Label="iot-demo-hub1-input" ProcessorType="Input" ProcessorId="iot-demo-hub1-input#3$0" AdapterType="InputIoTHub" PartitionIds="3" SerializerType="Json" />
+    <Node Id="outputStep#0$0" Label="outputStep" ProcessorType="Trill" ProcessorId="outputStep#0$0" InputTimeShift="00:00:00" />
+    <Node Id="outputStep#1$0" Label="outputStep" ProcessorType="Trill" ProcessorId="outputStep#1$0" InputTimeShift="00:00:00" />
+    <Node Id="outputStep#2$0" Label="outputStep" ProcessorType="Trill" ProcessorId="outputStep#2$0" InputTimeShift="00:00:00" />
+    <Node Id="outputStep#3$0" Label="outputStep" ProcessorType="Trill" ProcessorId="outputStep#3$0" InputTimeShift="00:00:00" />
+    <Node Id="outputStepMerger#0$0" Label="outputStepMerger" ProcessorType="Merger" ProcessorId="outputStepMerger#0$0" />
+    <Node Id="outputStep-output#0$0" Label="outputStep" ProcessorType="Output" ProcessorId="outputStep-output#0$0" AdapterType="LocalOutput" PartitionIds="0" SerializerType="Json" InputTimeShift="00:10:00" />
+  </Nodes>
+  <Links>
+    <Link Source="resourceName" Target="streamingNode0" Category="Contains" />
+    <Link Source="streamingNode0" Target="iot-demo-hub1-input#0$0" Label="iot-demo-hub1-input#0$0" Category="Contains" />
+    <Link Source="streamingNode0" Target="iot-demo-hub1-input#1$0" Label="iot-demo-hub1-input#1$0" Category="Contains" />
+    <Link Source="streamingNode0" Target="iot-demo-hub1-input#2$0" Label="iot-demo-hub1-input#2$0" Category="Contains" />
+    <Link Source="streamingNode0" Target="iot-demo-hub1-input#3$0" Label="iot-demo-hub1-input#3$0" Category="Contains" />
+    <Link Source="streamingNode0" Target="outputStep#0$0" Label="outputStep#0$0" Category="Contains" />
+    <Link Source="outputStep#0$0" Target="iot-demo-hub1-input#0$0" />
+    <Link Source="streamingNode0" Target="outputStep#1$0" Label="outputStep#1$0" Category="Contains" />
+    <Link Source="outputStep#1$0" Target="iot-demo-hub1-input#1$0" />
+    <Link Source="streamingNode0" Target="outputStep#2$0" Label="outputStep#2$0" Category="Contains" />
+    <Link Source="outputStep#2$0" Target="iot-demo-hub1-input#2$0" />
+    <Link Source="streamingNode0" Target="outputStep#3$0" Label="outputStep#3$0" Category="Contains" />
+    <Link Source="outputStep#3$0" Target="iot-demo-hub1-input#3$0" />
+    <Link Source="streamingNode0" Target="outputStepMerger#0$0" Label="outputStepMerger#0$0" Category="Contains" />
+    <Link Source="outputStepMerger#0$0" Target="outputStep#0$0" />
+    <Link Source="outputStepMerger#0$0" Target="outputStep#1$0" />
+    <Link Source="outputStepMerger#0$0" Target="outputStep#2$0" />
+    <Link Source="outputStepMerger#0$0" Target="outputStep#3$0" />
+    <Link Source="streamingNode0" Target="outputStep-output#0$0" Label="outputStep-output#0$0" Category="Contains" />
+    <Link Source="outputStep-output#0$0" Target="outputStepMerger#0$0" />
+  </Links>
+  <Properties />
+  <Categories />
+</DirectedGraph>

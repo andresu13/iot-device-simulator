@@ -1,0 +1,4 @@
+﻿{"timestamp":"2022-01-01T16:05:46.3211363Z","payload":{"OutputEvents":7.0,"OutputEventsPerSecond":7.0,"OutputWatermarkDelaySeconds":5.4644097,"OutputEventsSerializerErrors":0.0,"OutputEventsSerializerErrorsPerSecond":0.0}}
+{"timestamp":"2022-01-01T16:05:56.3071265Z","payload":{"OutputEvents":4.0,"OutputEventsPerSecond":4.0,"OutputWatermarkDelaySeconds":5.805312799999999,"OutputEventsSerializerErrors":0.0,"OutputEventsSerializerErrorsPerSecond":0.0}}
+{"timestamp":"2022-01-01T16:06:06.31097Z","payload":{"OutputEvents":5.0,"OutputEventsPerSecond":5.0,"OutputWatermarkDelaySeconds":6.2063052,"OutputEventsSerializerErrors":0.0,"OutputEventsSerializerErrorsPerSecond":0.0}}
+{"timestamp":"2022-01-01T16:06:08.3236651Z","payload":{"OutputEvents":5.0,"OutputEventsPerSecond":5.0,"OutputWatermarkDelaySeconds":5.4686103,"OutputEventsSerializerErrors":0.0,"OutputEventsSerializerErrorsPerSecond":0.0}}

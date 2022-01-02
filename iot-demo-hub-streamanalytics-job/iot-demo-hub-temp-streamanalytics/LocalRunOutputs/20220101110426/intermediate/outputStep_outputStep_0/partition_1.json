@@ -1,0 +1,12 @@
+{"Temperature":11066,"Humidity":11066,"EventProcessedUtcTime":"2022-01-01T16:04:37.1352238Z","PartitionId":1,"EventEnqueuedUtcTime":"2022-01-01T16:04:28.5300000Z"}
+{"Temperature":11067,"Humidity":11067,"EventProcessedUtcTime":"2022-01-01T16:04:37.2986945Z","PartitionId":1,"EventEnqueuedUtcTime":"2022-01-01T16:04:30.6110000Z"}
+{"Temperature":11068,"Humidity":11068,"EventProcessedUtcTime":"2022-01-01T16:04:37.3017094Z","PartitionId":1,"EventEnqueuedUtcTime":"2022-01-01T16:04:32.7260000Z"}
+{"Temperature":11069,"Humidity":11069,"EventProcessedUtcTime":"2022-01-01T16:04:37.3018732Z","PartitionId":1,"EventEnqueuedUtcTime":"2022-01-01T16:04:34.8190000Z"}
+{"Temperature":11070,"Humidity":11070,"EventProcessedUtcTime":"2022-01-01T16:04:38.7300026Z","PartitionId":1,"EventEnqueuedUtcTime":"2022-01-01T16:04:36.8070000Z"}
+{"Temperature":11071,"Humidity":11071,"EventProcessedUtcTime":"2022-01-01T16:04:40.8188946Z","PartitionId":1,"EventEnqueuedUtcTime":"2022-01-01T16:04:38.9010000Z"}
+{"Temperature":11072,"Humidity":11072,"EventProcessedUtcTime":"2022-01-01T16:04:42.9072629Z","PartitionId":1,"EventEnqueuedUtcTime":"2022-01-01T16:04:40.9960000Z"}
+{"Temperature":11073,"Humidity":11073,"EventProcessedUtcTime":"2022-01-01T16:04:45.0027926Z","PartitionId":1,"EventEnqueuedUtcTime":"2022-01-01T16:04:43.0740000Z"}
+{"Temperature":11074,"Humidity":11074,"EventProcessedUtcTime":"2022-01-01T16:04:47.0832906Z","PartitionId":1,"EventEnqueuedUtcTime":"2022-01-01T16:04:45.1680000Z"}
+{"Temperature":11075,"Humidity":11075,"EventProcessedUtcTime":"2022-01-01T16:04:49.0640992Z","PartitionId":1,"EventEnqueuedUtcTime":"2022-01-01T16:04:47.1530000Z"}
+{"Temperature":11076,"Humidity":11076,"EventProcessedUtcTime":"2022-01-01T16:04:51.1497277Z","PartitionId":1,"EventEnqueuedUtcTime":"2022-01-01T16:04:49.2480000Z"}
+{"Temperature":11077,"Humidity":11077,"EventProcessedUtcTime":"2022-01-01T16:04:53.1238838Z","PartitionId":1,"EventEnqueuedUtcTime":"2022-01-01T16:04:51.3570000Z"}

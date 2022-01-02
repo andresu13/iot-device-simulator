@@ -1,0 +1,10 @@
+﻿{
+  "id": "4ee7d004-476d-44a0-9c81-fb33110069c9",
+  "port": 18034,
+  "inputs": [
+    "iot-demo-eventhub-input"
+  ],
+  "outputs": [
+    "output"
+  ]
+}

@@ -14,6 +14,10 @@ from azure.iot.device.aio import IoTHubDeviceClient
 from azure.iot.device import Message
 from azure.iot.device import MethodResponse
 
+## remove these lines
+import datetime
+import csv
+
 ## Classes below simulate temperature and humidity sensors
 class SensorTemp():
     def __init__(self, min_temp=0, max_temp=100):
@@ -44,11 +48,9 @@ class SensorHumidity():
 
 ## This method will send Device-to-Cloud (C2D) messages/telemetry
 async def send_recurring_telemetry(sensors):
-    # Connect the client.
-    #await device_client.connect()
     
     # Send recurring telemetry
-    i = 0
+    i = 25000
     while True:
         i += 1
         msg_dict  = {}
@@ -56,16 +58,48 @@ async def send_recurring_telemetry(sensors):
             sensor_name = sensor.sensorName()
             sensor_id = sensor.sensorID()
             sensor_value = sensor.readSensorData()
-            msg_dict[sensor_name] = sensor_value
-            #msg = Message(json.dumps({"temperature": current_temp, "humidity": current_humidity}))
+            #msg_dict[sensor_name] = sensor_value
+            msg_dict[sensor_name] = i
+        
+        #### Sample basic JSON message structure ####
+        # json_msg = {"temperature":50, "humidity":{"sensor1": 50, "sensor2":80}}
+        # msg = Message(json.dumps(json_msg))
+        # msg.content_encoding = "utf-8"
+        # msg.content_type = "application/json"
+
+        #### Sample basic CSV message structure ####
+        # csv_msg="id,temperature,humidity\n12345,50,80"
+        # msg=Message(csv_msg)
+        # msg.content_encoding = "utf-8"
+        # msg.content_type = "text/csv"
+
+
         msg = Message(json.dumps(msg_dict))
         msg.message_id = uuid.uuid4()
         msg.correlation_id = uuid.uuid4()
         msg.content_encoding = "utf-8"
         msg.content_type = "application/json"
+        msg.custom_properties["my-custom-property"] = "yes"
+        
         print("sending message #" + str(i))
         print(msg)
-        await device_client.send_message(msg)
+        print(msg.message_id)
+        if(device_client.connected):
+            print("I am connected")
+        else:
+            print("Disconnected")
+        try:
+            await asyncio.gather(device_client.send_message(msg))
+        except Exception as e:
+            print(e)
+        #    print("I am here")
+            #device_client.send_message(msg)
+        #except asyncio_tools.CompoundException as exception:
+        #    print(exception)
+        #except Exception as e:
+            #return 'Error sendign IoT message', 500
+            #print("Network Connection Issue")
+            #raise
         time.sleep(device_properties["send_interval"])
 
 ## This method will handle Cloud-to-Device (C2D) messages
@@ -123,10 +157,14 @@ async def main():
     
     device_client = IoTHubDeviceClient.create_from_connection_string(conn_str)
 
+    # Connect the client.
+    await device_client.connect()
+
     # Get desired properties from device twin (such as send interval)
     twin = await device_client.get_twin()
     device_properties = twin["desired"]
     device_properties.pop("$version")
+    print(twin["desired"])
 
     # Set the method request handlers for receiving messages (D2C), receiving direct methods and device twin updates
     device_client.on_message_received = message_received_handler
@@ -135,7 +173,7 @@ async def main():
 
 
 
-    print(asyncio.all_tasks())
+    #print(asyncio.all_tasks())
 
 
     ##### DELETE THIS #################
@@ -177,9 +215,7 @@ async def main():
         raise
     finally:
         await device_client.shutdown()
-        #loop.close()
 
 
 if __name__ == "__main__":
-    #main()
     asyncio.run(main())

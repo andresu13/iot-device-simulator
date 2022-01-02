@@ -1,4 +1,0 @@
-SELECT
-    IoTHub.EnqueuedTime
-FROM
-    [iot-demo-hub1-input]

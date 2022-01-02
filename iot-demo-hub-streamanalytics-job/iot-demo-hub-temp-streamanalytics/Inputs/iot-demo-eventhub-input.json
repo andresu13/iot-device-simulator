@@ -1,0 +1,21 @@
+{
+    "Name": "iot-demo-eventhub-input",
+    "Type": "Data Stream",
+    "DataSourceType": "Event Hub",
+    "EventHubProperties": {
+        "ServiceBusNamespace": "iot-demo-hub-temperature-eventhub",
+        "EventHubName": "tempdata",
+        "SharedAccessPolicyName": "RootManageSharedAccessKey",
+        "SharedAccessPolicyKey": null,
+        "ConsumerGroupName": "streamanalytics-consumer",
+        "AuthenticationMode": "ConnectionString"
+    },
+    "DataSourceCredentialDomain": "f261a3f1-0b51-4571-9b36-da36e826e38c.StreamAnalystics",
+    "Serialization": {
+        "Type": "Json",
+        "Encoding": "UTF8"
+    },
+    "PartitionKey": "",
+    "CompressionType": "None",
+    "ScriptType": "Input"
+}

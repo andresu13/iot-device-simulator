@@ -1,0 +1,17 @@
+﻿{"timestamp":"2021-12-30T18:53:43.9066288Z","payload":{}}
+{"timestamp":"2021-12-30T18:53:53.8310822Z","payload":{"QueryWatermarkDelaySeconds":2.7542175}}
+{"timestamp":"2021-12-30T18:54:03.8281481Z","payload":{"QueryWatermarkDelaySeconds":2.8369221}}
+{"timestamp":"2021-12-30T18:54:13.8371888Z","payload":{"QueryWatermarkDelaySeconds":2.8480329}}
+{"timestamp":"2021-12-30T18:54:23.8244281Z","payload":{"QueryWatermarkDelaySeconds":2.8408298}}
+{"timestamp":"2021-12-30T18:54:33.8350455Z","payload":{"QueryWatermarkDelaySeconds":2.7192767}}
+{"timestamp":"2021-12-30T18:54:43.8241733Z","payload":{"QueryWatermarkDelaySeconds":2.0743563}}
+{"timestamp":"2021-12-30T18:54:53.8244266Z","payload":{"QueryWatermarkDelaySeconds":2.0084157}}
+{"timestamp":"2021-12-30T18:55:03.8272322Z","payload":{"QueryWatermarkDelaySeconds":2.6965464000000003}}
+{"timestamp":"2021-12-30T18:55:13.8274134Z","payload":{"QueryWatermarkDelaySeconds":2.2073551}}
+{"timestamp":"2021-12-30T18:55:23.8355495Z","payload":{"QueryWatermarkDelaySeconds":1.9081496}}
+{"timestamp":"2021-12-30T18:55:33.8335481Z","payload":{"QueryWatermarkDelaySeconds":1.838579}}
+{"timestamp":"2021-12-30T18:55:43.8290325Z","payload":{"QueryWatermarkDelaySeconds":2.0624005000000003}}
+{"timestamp":"2021-12-30T18:55:53.8315297Z","payload":{"QueryWatermarkDelaySeconds":2.8329332}}
+{"timestamp":"2021-12-30T18:56:03.8336135Z","payload":{"QueryWatermarkDelaySeconds":1.8349957}}
+{"timestamp":"2021-12-30T18:56:13.8297927Z","payload":{"QueryWatermarkDelaySeconds":2.5149266}}
+{"timestamp":"2021-12-30T18:56:15.8224383Z","payload":{"QueryWatermarkDelaySeconds":2.4034145}}
