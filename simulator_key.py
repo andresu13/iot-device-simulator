@@ -13,10 +13,8 @@ import numpy as np
 from azure.iot.device.aio import IoTHubDeviceClient
 from azure.iot.device import Message
 from azure.iot.device import MethodResponse
-
-## remove these lines
-import datetime
-import csv
+from azure.iot.device.aio import ProvisioningDeviceClient
+import dps_provisioning
 
 ## Classes below simulate temperature and humidity sensors
 class SensorTemp():
@@ -148,14 +146,36 @@ async def twin_patch_handler(patch):
     await device_client.patch_twin_reported_properties(device_properties)
 
 async def main():
-    # The connection string for a device should never be stored in code. For the sake of simplicity we're using an environment variable here.
-    #conn_str = os.getenv("IOTHUB_DEVICE_CONNECTION_STRING")
-    conn_str = "HostName=iot-demo-hub1.azure-devices.net;DeviceId=simulated-vm-device1;SharedAccessKey=dCDgVItTl0j+nrddy/MHXX/fTv/S9EVemLzTB4AGjdU="
+
     # The client object is used to interact with your Azure IoT hub.
     global device_client
     global device_properties
+
+    ### DPS Configuration
+
+    auth_type = "NONE"
+
+    if auth_type == "DPS":
+        ### Device will authenticate via DPS
+        PROVISIONING_HOST = "global.azure-devices-provisioning.net"
+        ID_SCOPE = "0ne00462BED"
+        DEVICE_ID = "simulated-vm-dps-device1"
+        DERIVED_KEY = dps_provisioning.derive_device_key(DEVICE_ID, "9ug7D8y5i9d534LKMwWUKzxrhtyp50/OltuRWm68WGGpPsuBiv0d9T6oJDENUQ/36B8vfNWObXpbc+EjVCWtrw==")
+        provisioning_device_client = ProvisioningDeviceClient.create_from_symmetric_key(PROVISIONING_HOST,DEVICE_ID,ID_SCOPE,DERIVED_KEY)
+        prov_result = await provisioning_device_client.register()
+        print("DPS Registration Information:")
+        print(prov_result.registration_state)
+        if prov_result.status == "assigned":
+            iot_assigned_hub = prov_result.registration_state.assigned_hub
+            device_client = IoTHubDeviceClient.create_from_connection_string(DERIVED_KEY,iot_assigned_hub, DEVICE_ID)
     
-    device_client = IoTHubDeviceClient.create_from_connection_string(conn_str)
+    else:
+        ### Device will authenticate directly to IoT Hub using Connection String
+
+        # The connection string for a device should never be stored in code. For the sake of simplicity we're using an environment variable here.
+        #conn_str = os.getenv("IOTHUB_DEVICE_CONNECTION_STRING")
+        CONN_STR = "HostName=iot-demo-hub1.azure-devices.net;DeviceId=simulated-vm-device1;SharedAccessKey=k9d3Pyljj5fgSTqd7t3UfWdwV/Mc40fKvIBR1LtfWk8="
+        device_client = IoTHubDeviceClient.create_from_connection_string(CONN_STR)
 
     # Connect the client.
     await device_client.connect()
