@@ -9,6 +9,7 @@ import asyncio
 import uuid
 import time
 import json
+import copy
 import numpy as np
 from azure.iot.device.aio import IoTHubDeviceClient
 from azure.iot.device import Message
@@ -86,18 +87,9 @@ async def send_recurring_telemetry(sensors):
             print("I am connected")
         else:
             print("Disconnected")
-        try:
-            await asyncio.gather(device_client.send_message(msg))
-        except Exception as e:
-            print(e)
-        #    print("I am here")
-            #device_client.send_message(msg)
-        #except asyncio_tools.CompoundException as exception:
-        #    print(exception)
+        #try:
+        await asyncio.gather(device_client.send_message(msg))
         #except Exception as e:
-            #return 'Error sendign IoT message', 500
-            #print("Network Connection Issue")
-            #raise
         time.sleep(device_properties["send_interval"])
 
 ## This method will handle Cloud-to-Device (C2D) messages
@@ -153,7 +145,7 @@ async def main():
 
     ### DPS Configuration
 
-    auth_type = "NONE"
+    auth_type = "DPS"
 
     if auth_type == "DPS":
         ### Device will authenticate via DPS
@@ -167,7 +159,10 @@ async def main():
         print(prov_result.registration_state)
         if prov_result.status == "assigned":
             iot_assigned_hub = prov_result.registration_state.assigned_hub
-            device_client = IoTHubDeviceClient.create_from_connection_string(DERIVED_KEY,iot_assigned_hub, DEVICE_ID)
+            device_client = IoTHubDeviceClient.create_from_symmetric_key(symmetric_key=DERIVED_KEY,hostname=iot_assigned_hub, device_id=DEVICE_ID)
+        #else:
+        #    print("shit failed")
+        #   raise "Device could not be registered with DPS"
     
     else:
         ### Device will authenticate directly to IoT Hub using Connection String
@@ -182,9 +177,14 @@ async def main():
 
     # Get desired properties from device twin (such as send interval)
     twin = await device_client.get_twin()
-    device_properties = twin["desired"]
+    device_properties = {}
+    device_properties = copy.deepcopy(twin["desired"])
     device_properties.pop("$version")
-    print(twin["desired"])
+    if "send_interval" not in device_properties:
+        device_properties["send_interval"] = 2
+    #print(twin["desired"])
+    print(device_properties)
+    
 
     # Set the method request handlers for receiving messages (D2C), receiving direct methods and device twin updates
     device_client.on_message_received = message_received_handler
