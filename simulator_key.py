@@ -145,27 +145,16 @@ async def main():
 
     ### DPS Configuration
 
-    auth_type = "DPS"
+    provisioning_type = "DPS"
+    # Choose between 'symmetric' or 'X509'
+    auth_type = "X509"
 
-    if auth_type == "DPS":
-        ### Device will authenticate via DPS
-        PROVISIONING_HOST = "global.azure-devices-provisioning.net"
-        ID_SCOPE = "0ne00462BED"
-        DEVICE_ID = "simulated-vm-dps-device1"
-        DERIVED_KEY = dps_provisioning.derive_device_key(DEVICE_ID, "9ug7D8y5i9d534LKMwWUKzxrhtyp50/OltuRWm68WGGpPsuBiv0d9T6oJDENUQ/36B8vfNWObXpbc+EjVCWtrw==")
-        provisioning_device_client = ProvisioningDeviceClient.create_from_symmetric_key(PROVISIONING_HOST,DEVICE_ID,ID_SCOPE,DERIVED_KEY)
-        prov_result = await provisioning_device_client.register()
-        print("DPS Registration Information:")
-        print(prov_result.registration_state)
-        if prov_result.status == "assigned":
-            iot_assigned_hub = prov_result.registration_state.assigned_hub
-            device_client = IoTHubDeviceClient.create_from_symmetric_key(symmetric_key=DERIVED_KEY,hostname=iot_assigned_hub, device_id=DEVICE_ID)
-        #else:
-        #    print("shit failed")
-        #   raise "Device could not be registered with DPS"
-    
+    if provisioning_type == "DPS":
+        ### Device will provision via DPS
+
+        device_client = await dps_provisioning.dps_register(auth_type)
     else:
-        ### Device will authenticate directly to IoT Hub using Connection String
+        ### Device will provision directly to IoT Hub using Connection String
 
         # The connection string for a device should never be stored in code. For the sake of simplicity we're using an environment variable here.
         #conn_str = os.getenv("IOTHUB_DEVICE_CONNECTION_STRING")

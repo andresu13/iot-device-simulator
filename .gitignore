@@ -1,3 +1,6 @@
+certificates/
+certs_private/
+certs_public/
 venv/
 .DS_Store
 .huskyrc.json
