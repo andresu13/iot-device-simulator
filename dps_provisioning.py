@@ -26,16 +26,29 @@ def derive_device_key(device_id, group_symmetric_key):
     return device_key_encoded.decode("utf-8")
 
 async def dps_register(auth_type="symmetric"):
+    ### Specify ModelID for IoT Plug and Play DTDL ###
+    model_id = "dtmi:iotDemoCentral:Raspberry_1ig;1"
+
+    ### Required Configurations ###
     PROVISIONING_HOST = "global.azure-devices-provisioning.net"
-    ID_SCOPE = "0ne00462BED"
+    #ID_SCOPE = "0ne00462BED" # For my demo IoT Hub
+    ID_SCOPE = "0ne00486E0D" # for my demo IoT Central
     auth_type = auth_type
     print(auth_type)
-    
 
     if auth_type == "symmetric":
-        DEVICE_ID = "simulated-vm-dps-device1"
-        DERIVED_KEY = derive_device_key(DEVICE_ID, "9ug7D8y5i9d534LKMwWUKzxrhtyp50/OltuRWm68WGGpPsuBiv0d9T6oJDENUQ/36B8vfNWObXpbc+EjVCWtrw==")
+        print("DPS: Symmetric Key")
+        #DEVICE_ID = "simulated-vm-dps-device1" # For my demo IoT Hub
+        #DERIVED_KEY = derive_device_key(DEVICE_ID, "9ug7D8y5i9d534LKMwWUKzxrhtyp50/OltuRWm68WGGpPsuBiv0d9T6oJDENUQ/36B8vfNWObXpbc+EjVCWtrw==") # For my demo IoT Hub
+        PRIMARY_KEY = "6WobjdlSK4b2Zkh9+iZDa11Wu/C6cOnFHDte1YA0WKyDgKIyhLwrTCeBj21ZIPHVbbS36ISVy2CFCKenEArbwA=="
+        DEVICE_ID = "raspberry-iotdevice-17" # For my demo IoT Central
+        DERIVED_KEY = derive_device_key(DEVICE_ID, PRIMARY_KEY) # For my demo IoT Central
         provisioning_device_client = ProvisioningDeviceClient.create_from_symmetric_key(PROVISIONING_HOST,DEVICE_ID,ID_SCOPE,DERIVED_KEY)
+
+        ### Optional: Send ModelId to DPS to auto-assign template in IoT Central
+        provisioning_device_client.provisioning_payload = {"modelId":model_id}
+        ###
+
         prov_result = await provisioning_device_client.register()
         print("DPS Registration Information:")
         print(prov_result.registration_state)
@@ -45,7 +58,7 @@ async def dps_register(auth_type="symmetric"):
             
     
     elif auth_type == "X509":
-        print("X509")
+        print("DPS: X509")
         DEVICE_ID = "simulated-vm-dps-X509-device1"
         #X509_CERT_FILE = "certs_public/"+DEVICE_ID+".pem"
         X509_CERT_FILE = "certs_public/simulated-vm-dps-X509-device1.chain.pem"

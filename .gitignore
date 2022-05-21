@@ -1,6 +1,7 @@
 certificates/
 certs_private/
 certs_public/
+iot-demo-hub-streamanalytics-job/
 venv/
 .DS_Store
 .huskyrc.json

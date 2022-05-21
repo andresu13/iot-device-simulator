@@ -16,6 +16,7 @@ from azure.iot.device import Message
 from azure.iot.device import MethodResponse
 from azure.iot.device.aio import ProvisioningDeviceClient
 import dps_provisioning
+from azure.iot.device import X509
 
 ## Classes below simulate temperature and humidity sensors
 class SensorTemp():
@@ -27,7 +28,7 @@ class SensorTemp():
         self.current_temp = np.random.normal(self.current_temp, 2)
         return self.current_temp
     def sensorName(self):
-        return "Temperature"
+        return "temperature"
     def sensorID(self):
         return "temp-01"
 
@@ -41,7 +42,7 @@ class SensorHumidity():
         self.current_humidity = np.random.normal(self.current_humidity, 2)
         return self.current_humidity
     def sensorName(self):
-        return "Humidity"
+        return "humidity"
     def sensorID(self):
         return "humidity-01"
 
@@ -57,8 +58,8 @@ async def send_recurring_telemetry(sensors):
             sensor_name = sensor.sensorName()
             sensor_id = sensor.sensorID()
             sensor_value = sensor.readSensorData()
-            #msg_dict[sensor_name] = sensor_value
-            msg_dict[sensor_name] = i
+            msg_dict[sensor_name] = sensor_value
+            #msg_dict[sensor_name] = i
         
         #### Sample basic JSON message structure ####
         # json_msg = {"temperature":50, "humidity":{"sensor1": 50, "sensor2":80}}
@@ -145,21 +146,55 @@ async def main():
 
     ### DPS Configuration
 
+    # Choose between Manual or DPS
     provisioning_type = "DPS"
+
     # Choose between 'symmetric' or 'X509'
-    auth_type = "X509"
+    auth_type = "symmetric"
 
     if provisioning_type == "DPS":
         ### Device will provision via DPS
 
         device_client = await dps_provisioning.dps_register(auth_type)
     else:
-        ### Device will provision directly to IoT Hub using Connection String
+        if auth_type == "symmetric":
+            ### Device will register directly to IoT Hub using Connection String
+            print("Manual: Symmetric Key")
 
-        # The connection string for a device should never be stored in code. For the sake of simplicity we're using an environment variable here.
-        #conn_str = os.getenv("IOTHUB_DEVICE_CONNECTION_STRING")
-        CONN_STR = "HostName=iot-demo-hub1.azure-devices.net;DeviceId=simulated-vm-device1;SharedAccessKey=k9d3Pyljj5fgSTqd7t3UfWdwV/Mc40fKvIBR1LtfWk8="
-        device_client = IoTHubDeviceClient.create_from_connection_string(CONN_STR)
+            # The connection string for a device should never be stored in code. For the sake of simplicity we're using an environment variable here.
+            #conn_str = os.getenv("IOTHUB_DEVICE_CONNECTION_STRING")
+            #CONN_STR = "HostName=iot-demo-hub1.azure-devices.net;DeviceId=simulated-vm-device1;SharedAccessKey=k9d3Pyljj5fgSTqd7t3UfWdwV/Mc40fKvIBR1LtfWk8="
+            #dev_conn_string = "HostName=iot-demo-hub1.azure-devices.net;DeviceId=simulated-vm-device1;SharedAccessKey=22Bc0YnBoOQf45bwN/O8me/HJ/GrAZX4aKpigVf7Z1k="
+            
+            ### Optional: Send ModelId for IoT Plug and Play DTDL###
+            model_id = "dtmi:iotDemoCentral:Raspberry_1ig;1"
+            ###
+
+            dev_conn_string = "HostName=iotc-6ab80667-712c-4f33-9aa7-3733ac29cdfe.azure-devices.net;DeviceId=raspberry-iotdevice-5;SharedAccessKey=FzI7SMnoHhoSQD6iYqt0fv5CUuAc/lykOnp1dGKsCBA="
+            device_client = IoTHubDeviceClient.create_from_connection_string(dev_conn_string, product_info=model_id)
+            
+
+
+        else:
+            print("Manual: X509")
+            ### Code below will register device directly to IoT Hub through and IoT Edge Gateway using X.509 authentication
+            #You need to pass the certificate of IoT Edge CA or Root CA that signed it for the device to validate IoT Edge identity and establish TLS connection
+
+            ### Lines below are needed if you are connecting through IoT Edge. I have not been able to make it work yet.
+            #edgeca_cert_path = "C:\ProgramData\iotedgehubdev\data\certs\edge-device-ca\cert\edge-device-ca.cert.pem"
+            #certfile = open(edgeca_cert_path)
+            #edge_ca_cert = certfile.read()
+            ###
+            
+            iot_edge_name = "iot-demo-hub1.azure-devices.net"
+            DEVICE_ID = "simulated-vm-X509-device1"
+            X509_CERT_FILE = "certs_public/"+DEVICE_ID+".pem"
+            #X509_CERT_FILE = "certs_public/simulated-vm-dps-X509-device1.chain.pem"
+            X509_KEY_FILE = "certs_private/"+DEVICE_ID+".key.pem"
+            #X509_KEY_FILE = "certs_private/simulated-vm-dps-X509-device1.key.pem"
+            x509 = X509(cert_file=X509_CERT_FILE, key_file=X509_KEY_FILE)
+            device_client = IoTHubDeviceClient.create_from_x509_certificate(x509,iot_edge_name, device_id=DEVICE_ID)
+            #device_client = IoTHubDeviceClient.create_from_connection_string(dev_conn_string)
 
     # Connect the client.
     await device_client.connect()
